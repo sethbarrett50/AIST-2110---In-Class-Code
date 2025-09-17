@@ -1,0 +1,78 @@
+# --- Python bytecode / cache ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.bak
+*.swp
+*.tmp
+.cache/
+
+# --- Virtual environments (uv / venv / pipenv) ---
+.venv/
+.venv*/
+env/
+venv/
+pip-wheel-metadata/
+
+# NOTE: Commit your lockfile and project config
+# (keep these tracked)
+# pyproject.toml
+# uv.lock
+
+# --- Build / packaging ---
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
+
+# --- Testing / coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+.pyre/
+.pytype/
+.mypy_cache/
+.ruff_cache/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+.jupyter/lab/workspaces/
+.local/share/jupyter/runtime/
+
+# --- Sphinx / MkDocs / docs builds ---
+docs/_build/
+site/
+
+# --- Logs ---
+*.log
+
+# --- OS-specific ---
+.DS_Store
+Thumbs.db
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.iml
+
+# --- Env & secrets (be careful!) ---
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+
+# --- Backups ---
+*.bkp
