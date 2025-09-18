@@ -1,7 +1,7 @@
 from typing import Tuple, Union
 
 
-def grade_formatter(
+def grade_format(
     score: float,
     out_of: float = 100.0,
     *,
@@ -81,8 +81,6 @@ def grade_formatter(
 
     percent = (score / out_of) * 100.0
 
-    # Enforce explicit bounds on percentage to satisfy the requirement that
-    # grades must be in [0, 100].
     if percent < 0.0 or percent > 100.0:
         raise ValueError(
             f"Computed percentage {percent:.4f} is outside [0, 100]. "
@@ -124,10 +122,8 @@ def _trimmed_float(value: float, decimals: int) -> str:
     Round to `decimals` places, then return a string without trailing zeros
     or a trailing decimal point.
     """
-    # Use rounding only for display; preserve magnitude.
     rounded = round(value, decimals)
     text = f"{rounded:.{decimals}f}" if decimals > 0 else f"{int(round(rounded))}"
-    # Remove trailing zeros and a stray decimal point (e.g., '74.00' -> '74').
     if "." in text:
         text = text.rstrip("0").rstrip(".")
     return text
