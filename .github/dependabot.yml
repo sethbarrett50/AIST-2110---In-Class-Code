@@ -4,8 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    days-until-pr: 14
 
   - package-ecosystem: "uv"
     directory: "/"
     schedule:
       interval: "weekly"
+    days-until-pr: 14
