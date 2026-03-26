@@ -1,8 +1,2 @@
 # Default owner for everything
 * @sethbarrett50
-
-# Workflows
-.github/workflows/ @sethbarrett50
-
-# Content/data
-src/lib/data/ @sethbarrett50
