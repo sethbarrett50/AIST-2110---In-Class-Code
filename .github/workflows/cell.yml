@@ -3,7 +3,7 @@ name: Cell Output Check
 on:
   pull_request:
   push:
-    branches: [ main, master ]
+    branches: ["**"]
 
 jobs:
   notebook-cleanliness:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v7
 
       - name: Sync dependencies (uv)
         run: make sync
