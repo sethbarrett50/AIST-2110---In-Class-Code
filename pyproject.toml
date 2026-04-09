@@ -1,14 +1,17 @@
 [project]
 name = "inclasscode"
-version = "0.1.0"
+version = "0.1.1"
 description = "Code examples for in-class demonstrations for AIST 2110 at Augusta University"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "IPython==9.5.0",
     "beautifulsoup4>=4.14.3",
-    "cryptography==46.0.5",
     "ipykernel==7.2.0",
+]
+
+[dependency-groups]
+dev = [
     "pytest==9.0.2",
-    "ruff==0.15.6",
+    "ruff==0.15.7",
 ]
