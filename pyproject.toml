@@ -12,6 +12,14 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "deptry>=0.25.1",
     "pytest==9.0.2",
     "ruff==0.15.7",
 ]
+
+[tool.deptry]
+root = ["src"]
+
+[tool.deptry.per_rule_ignores]
+DEP001 = ["grades", "grade_formatter"]
+DEP002 = ["IPython", "ipykernel"]

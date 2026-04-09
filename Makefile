@@ -21,3 +21,6 @@ lint: ## Lint with ruff and apply safe auto-fixes
 
 check-out: ## Checks for output cells in Juypter Notebook files
 	$(UV) run tools/check_notebook_outputs.py  --verbose
+
+deps.check: ## Check for dependency issues
+	uv run deptry .

@@ -11,6 +11,8 @@
 ## Checklist
 
 - [ ] `make lint`
+- [ ] `make deps.check`
+- [ ] Ensure no cell outputs remain in Juypter Notebook files
 
 ## Screenshots (optional)
 
