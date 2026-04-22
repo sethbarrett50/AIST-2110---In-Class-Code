@@ -186,4 +186,4 @@ print(f'Profit:        ${profit:.2f}')
 print(f'Avg per cup:   ${avg_profit:.2f}')
 
 
-# Created by Seth Barrett | 2025
+# Created by Seth Barrett | 2026
