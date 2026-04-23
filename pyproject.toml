@@ -1,6 +1,6 @@
 [project]
 name = "inclasscode"
-version = "0.1.4"
+version = "0.1.5"
 description = "Code examples for in-class demonstrations for AIST 2110 at Augusta University"
 readme = "README.md"
 requires-python = ">=3.12"
