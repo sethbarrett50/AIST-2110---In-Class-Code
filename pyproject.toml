@@ -1,6 +1,6 @@
 [project]
 name = "inclasscode"
-version = "0.1.6"
+version = "0.1.7"
 description = "Code examples for in-class demonstrations for AIST 2110 at Augusta University"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -14,7 +14,7 @@ dependencies = [
 dev = [
     "deptry>=0.25.1",
     "pytest>=9.0.3",
-    "ruff>=0.15.8",
+    "ruff>=0.15.11",
 ]
 
 [tool.deptry]
