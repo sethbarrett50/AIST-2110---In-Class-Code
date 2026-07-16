@@ -14,7 +14,7 @@ dependencies = [
 dev = [
     "deptry>=0.25.1",
     "pytest>=9.0.3",
-    "ruff>=0.15.15",
+    "ruff>=0.15.20",
 ]
 
 [tool.deptry]
