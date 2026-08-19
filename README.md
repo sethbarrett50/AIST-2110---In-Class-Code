@@ -151,7 +151,7 @@ If you want a bare Python REPL with a convenient `clear()` helper (as used in la
 Each script ensures Python 3 is available and then launches a REPL where `clear()` is pre-defined:
 
 ```python
-clear = lambda: os.system("cls" if os.name == "nt" else "clear")
+clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 ```
 
 ---
