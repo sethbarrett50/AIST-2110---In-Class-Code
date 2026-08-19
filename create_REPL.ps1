@@ -39,6 +39,7 @@ function Ensure-Admin {
   $current = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
   if (-not $current.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Warn "Elevation required for installation. Relaunching as Administrator..."
+    Write-Warn "Python will install in the new elevated window, and the REPL will open there. This window will close."
     $psi = @{
       FilePath  = "powershell.exe"
       ArgumentList = "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "`"$PSCommandPath`""

@@ -9,9 +9,9 @@ jobs:
   notebook-cleanliness:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.1
 
-      - uses: astral-sh/setup-uv@v8.2.0
+      - uses: astral-sh/setup-uv@v9.0.0
 
       - name: Sync dependencies (uv)
         run: make sync

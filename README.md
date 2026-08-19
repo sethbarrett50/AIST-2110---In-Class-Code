@@ -2,6 +2,8 @@
 
 This repository contains the Jupyter Notebooks and small helper scripts I use during AIST-2110 labs at Augusta University. Content is organized by week under `src/`.
 
+> A few markdown cells (weeks 10-12) include [Mermaid](https://mermaid.js.org/) diagrams. These render in VS Code's notebook view and on GitHub's `.ipynb` web view, but **not** in Google Colab or vanilla JupyterLab/Classic Notebook without an extra extension — you'll see the raw code block there instead. Nothing depends on the diagram rendering; the surrounding text/ASCII stands on its own.
+
 ---
 
 ## Usage
@@ -151,7 +153,7 @@ If you want a bare Python REPL with a convenient `clear()` helper (as used in la
 Each script ensures Python 3 is available and then launches a REPL where `clear()` is pre-defined:
 
 ```python
-clear = lambda: os.system("cls" if os.name == "nt" else "clear")
+clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 ```
 
 ---
