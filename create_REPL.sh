@@ -53,22 +53,32 @@ install_python_macos() {
 }
 
 install_python_linux() {
+  SUDO=""
+  if [ "$(id -u)" -ne 0 ]; then
+    if require_cmd sudo; then
+      SUDO="sudo"
+    else
+      err "Installing packages requires root. You are not root and 'sudo' is not available. Install Python 3 manually and re-run."
+      exit 1
+    fi
+  fi
+
   if require_cmd apt-get; then
     log "Installing Python via apt-get..."
-    sudo apt-get update -y
-    sudo apt-get install -y python3 python3-pip python3-venv
+    $SUDO apt-get update -y
+    $SUDO apt-get install -y python3 python3-pip python3-venv
   elif require_cmd dnf; then
     log "Installing Python via dnf..."
-    sudo dnf install -y python3 python3-pip
+    $SUDO dnf install -y python3 python3-pip
   elif require_cmd yum; then
     log "Installing Python via yum..."
-    sudo yum install -y python3 python3-pip
+    $SUDO yum install -y python3 python3-pip
   elif require_cmd pacman; then
     log "Installing Python via pacman..."
-    sudo pacman -Sy --noconfirm python
+    $SUDO pacman -Sy --noconfirm python
   elif require_cmd zypper; then
     log "Installing Python via zypper..."
-    sudo zypper --non-interactive install python3
+    $SUDO zypper --non-interactive install python3
   else
     err "No supported package manager found (apt/dnf/yum/pacman/zypper). Install Python 3 manually and re-run."
     exit 1
