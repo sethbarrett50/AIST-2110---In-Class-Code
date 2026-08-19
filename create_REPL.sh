@@ -35,6 +35,16 @@ pick_python() {
   return 1
 }
 
+# A uv-managed Python isn't necessarily linked onto PATH as python3/python.
+pick_uv_python() {
+  require_cmd uv || return 1
+  local candidate
+  candidate=$(uv python find 2>/dev/null) || return 1
+  [ -x "$candidate" ] || return 1
+  PY="$candidate"
+  return 0
+}
+
 install_python_macos() {
   if ! require_cmd brew; then
     err "Homebrew is not installed. Install it from https://brew.sh/ and re-run."
@@ -52,31 +62,65 @@ install_python_macos() {
   }
 }
 
+install_python_via_uv() {
+  if ! require_cmd uv; then
+    if require_cmd curl; then
+      log "Installing uv (user-local, no root needed) via curl..."
+      curl -LsSf https://astral.sh/uv/install.sh | sh
+    elif require_cmd wget; then
+      log "Installing uv (user-local, no root needed) via wget..."
+      wget -qO- https://astral.sh/uv/install.sh | sh
+    else
+      err "No root access, and neither curl nor wget is available to bootstrap uv. Install Python 3 manually and re-run."
+      exit 1
+    fi
+    export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+    if ! require_cmd uv; then
+      err "uv installation did not produce a usable 'uv' on PATH. Install Python 3 manually and re-run."
+      exit 1
+    fi
+  fi
+
+  log "Installing a user-local Python via uv..."
+  uv python install 3.12
+}
+
 install_python_linux() {
+  SUDO=""
+  if [ "$(id -u)" -ne 0 ]; then
+    if require_cmd sudo; then
+      SUDO="sudo"
+    else
+      warn "Not root and 'sudo' is not available; cannot use a system package manager."
+      install_python_via_uv
+      return 0
+    fi
+  fi
+
   if require_cmd apt-get; then
     log "Installing Python via apt-get..."
-    sudo apt-get update -y
-    sudo apt-get install -y python3 python3-pip python3-venv
+    $SUDO apt-get update -y
+    $SUDO apt-get install -y python3 python3-pip python3-venv
   elif require_cmd dnf; then
     log "Installing Python via dnf..."
-    sudo dnf install -y python3 python3-pip
+    $SUDO dnf install -y python3 python3-pip
   elif require_cmd yum; then
     log "Installing Python via yum..."
-    sudo yum install -y python3 python3-pip
+    $SUDO yum install -y python3 python3-pip
   elif require_cmd pacman; then
     log "Installing Python via pacman..."
-    sudo pacman -Sy --noconfirm python
+    $SUDO pacman -Sy --noconfirm python
   elif require_cmd zypper; then
     log "Installing Python via zypper..."
-    sudo zypper --non-interactive install python3
+    $SUDO zypper --non-interactive install python3
   else
-    err "No supported package manager found (apt/dnf/yum/pacman/zypper). Install Python 3 manually and re-run."
-    exit 1
+    warn "No supported package manager found (apt/dnf/yum/pacman/zypper)."
+    install_python_via_uv
   fi
 }
 
 ensure_python() {
-  if pick_python; then
+  if pick_python || pick_uv_python; then
     log "Found Python: $PY ($($PY -V 2>&1))"
     return 0
   fi
@@ -88,7 +132,7 @@ ensure_python() {
     install_python_linux
   fi
 
-  if ! pick_python; then
+  if ! pick_python && ! pick_uv_python; then
     err "Python 3 installation appears to have failed. Please install manually and re-run."
     exit 1
   fi
