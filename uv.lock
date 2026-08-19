@@ -229,7 +229,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "beautifulsoup4", specifier = ">=4.14.3" },
+    { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "ipykernel", specifier = "==7.3.0" },
     { name = "ipython", specifier = "==9.5.0" },
 ]
